@@ -4,6 +4,7 @@ import axios from 'axios';
 
 import AddNewItem from './components/add-item.js';
 import Items from './components/items.js';
+import './app.css';
 
 const API_SERVER = 'http://localhost:3001';
 
@@ -59,7 +60,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <h1>Our Items</h1>
+        <h1 className="header">Our Items</h1>
         <AddNewItem handleAddItem={this.addItem} />
         <hr />
         <Items 
