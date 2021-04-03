@@ -1,6 +1,7 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Form, Button} from 'react-bootstrap';
+import '../app.css';
 
 class UpdateItemForm extends React.Component {
 
@@ -29,9 +30,9 @@ class UpdateItemForm extends React.Component {
     return (
       <Form data-testid={`update-form-${this.props.item.name}`} onSubmit={this.handleSubmit}>
         <Form.Group>
-          <Form.Control data-testid={`update-field-${this.props.item.name}`} type="text" name="notes" placeholder="add a note" onChange={this.handleChange} />
+          <Form.Control data-testid={`update-field-${this.props.item.name}`}  type="text" name="notes" placeholder="add a note" onChange={this.handleChange} />
         </Form.Group>
-        <Button className="float-left mt-3" type="submit">Update</Button>
+        <Button variant="secondary" className="float-left mt-3" type="submit">Update</Button>
       </Form>
     );
   }

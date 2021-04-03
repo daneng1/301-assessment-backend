@@ -1,6 +1,7 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Form, Button} from 'react-bootstrap';
+import '../app.css';
 
 class AddNewItem extends React.Component {
 
@@ -17,13 +18,13 @@ class AddNewItem extends React.Component {
     const formData = this.state.formData;
     formData[field] = value;
     this.setState({formData});
-    console.log('formData', formData);
+    // console.log('formData', formData);
   }
 
   handleSubmit = (e) => {
     e.preventDefault();
     this.props.handleAddItem(this.state.formData)
-    console.log('in handleSubmit', this.state.formData);
+    // console.log('in handleSubmit', this.state.formData);
   }
 
   render() {
@@ -31,14 +32,14 @@ class AddNewItem extends React.Component {
     return (
       <Form data-testid="add-form" onSubmit={this.handleSubmit}>
         <Form.Group>
-          <Form.Label>Item</Form.Label>
+          <Form.Label className="reverseText">Item</Form.Label>
           <Form.Control type="text" placeholder="Name" data-testid="add-form-name" name="name" onChange={this.handleChange} />
         </Form.Group>
         <Form.Group>
-          <Form.Label>Description</Form.Label>
+          <Form.Label className="reverseText">Description</Form.Label>
           <Form.Control type="text" placeholder="Description" data-testid="add-form-description" name="description" onChange={this.handleChange} />
         </Form.Group>
-        <Button variant="primary" type="submit">
+        <Button variant="secondary" type="submit">
           Add Item
         </Button>
       </Form>
