@@ -6,7 +6,7 @@ import './app.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Container from 'react-bootstrap/Container';
 
-const API_SERVER = 'http://localhost:3001';
+const API_SERVER = 'https://git.heroku.com/m301-assessment-api.git';
 
 class App extends React.Component {
 
