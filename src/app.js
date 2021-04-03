@@ -2,23 +2,29 @@ import React from 'react';
 
 import axios from 'axios';
 
-import Form from './components/add-item.js';
+import AddNewItem from './components/add-item.js';
 import Items from './components/items.js';
 
-const API_SERVER = process.env.REACT_APP_API;
+const API_SERVER = 'http://localhost:3001';
 
 class App extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      items: []
+      items: [],
+      selectedItem: {}
     }
   }
 
   addItem = async (item) => {
-    await axios.post(`${API_SERVER}/items`, item);
-    this.getItems();
+    try {
+      console.log(item);
+      await axios.post(`${API_SERVER}/items`, { name: item.name, description: item.description });
+      this.getItems();
+    } catch(error) {
+      console.log(error.messgae);
+    }
   }
 
   deleteItem = async (id) => {
@@ -27,14 +33,23 @@ class App extends React.Component {
   }
 
   updateItem = async (item) => {
-    await axios.put(`${API_SERVER}/items/${item}`, item);
-    this.getItems();
+    try {
+      await axios.put(`${API_SERVER}/items/${item._id}`, item);
+      this.getItems();
+    } catch(error) {
+      console.log(error.message);
+    }
   }
 
   getItems = async () => {
-    const response = await axios.get(`${API_SERVER}/items/${item._id}`);
-    const items = response.data;
-    this.setState({items});
+    try{
+      const response = await axios.get(`${API_SERVER}/items`);
+      const items = response.data;
+      console.log('response', response);
+      this.setState({items});
+    } catch(err){
+      console.log(err.message);
+    }
   }
 
   async componentDidMount() {
@@ -45,9 +60,13 @@ class App extends React.Component {
     return (
       <div>
         <h1>Our Items</h1>
-        <Form handleAddItem={this.addItem} />
+        <AddNewItem handleAddItem={this.addItem} />
         <hr />
-        <Items handleDelete={this.deleteItem} itemsList={this.state.items} />
+        <Items 
+        selectedItem={this.state.selectedItem}
+          handleUpdate={this.updateItem} 
+          handleDelete={this.deleteItem} 
+          itemsList={this.state.items} />
       </div>
     );
   }

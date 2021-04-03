@@ -14,7 +14,7 @@ class UpdateItemForm extends React.Component {
     const value = e.target.value;
     const item = this.state.item;
     item[field] = value;
-    this.setState(item);
+    this.setState({item});
   }
 
   handleSubmit = (e) => {
